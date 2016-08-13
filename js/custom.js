@@ -9,6 +9,12 @@ return /^()[A-Za-z0-9_-]+\.+[A-Za-z0-9.\/%&=\?_:;-]+$/.test(value);
 checkurl : { checkurl : true }
 });
 
+jQuery.validator.addMethod("pwcheck", function(value) {
+   return /^[A-Za-z0-9\d=!\-@._*]*$/.test(value) // consists of only these
+});
+
+$.validator.messages.pwcheck = "Only alphanumeric please";
+
 jQuery.validator.addMethod('validIP', function(value) {
     var split = value.split('.');
     if (split.length != 4)
@@ -77,7 +83,8 @@ jQuery.validator.addMethod('validIP', function(value) {
 
             password: {
                 required: true,
-                minlength: 8
+                minlength: 8,
+                pwcheck: true
             },
             confirm_password: {
                 required: true,
@@ -110,10 +117,6 @@ jQuery.validator.addMethod('validIP', function(value) {
             },
             username: {
                 required: true
-            },
-            password: {
-                required: true,
-                minlength: 8
             },
 
             email: {

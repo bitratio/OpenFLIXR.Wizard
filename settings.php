@@ -276,6 +276,15 @@ crudini --set /opt/Mylar/config.ini SABnzbd sab_apikey \$sabapi
 ## plex
 cp /opt/config/monit/plex /etc/monit/conf.d/
 
+## miscellaneous
+cp /opt/config/monit/mopidy /etc/monit/conf.d/
+cp /opt/config/monit/nfs /etc/monit/conf.d/
+cp /opt/config/monit/ntp /etc/monit/conf.d/
+cp /opt/config/monit/redis /etc/monit/conf.d/
+cp /opt/config/monit/ssh /etc/monit/conf.d/
+cp /opt/config/monit/webmin /etc/monit/conf.d/
+cp /opt/config/monit/nzbhydra /etc/monit/conf.d/
+
 ## plexrequests
 plexreqapi=$(curl -s -X GET --header 'Accept: application/json' 'http://localhost:3579/request/api/apikey?username=openflixr&password='\$oldpassword'' | cut -c10-41)
 
@@ -522,7 +531,7 @@ iface \$nwadapter inet static
 address $ip
 netmask $subnet
 gateway $gateway
-dns-nameservers $dns
+dns-nameservers 127.0.0.1
 EOF
     else
 cat > /etc/network/interfaces<<EOF
@@ -537,17 +546,19 @@ iface lo inet loopback
 
 # The primary network interface
 iface \$nwadapter inet dhcp
-dns-nameservers 8.8.8.8 8.8.4.4
+dns-nameservers 127.0.0.1
 EOF
 
     fi
 
 ## letsencrypt
-    if [ \"\$letsencrypt\" == 'on' ]
+    if [ \"\$domainname\" != '' ]
         then
           rm -rf /var/log/letsencrypt/
           sed -i 's/^email.*/email = $email/' /opt/letsencrypt/cli.ini
           sed -i 's/^domains.*/domains = $domainname, www.$domainname/' /opt/letsencrypt/cli.ini
+          sed -i 's/check host example.com with address example.com/check host $domain with address $domain/' /opt/config/monit/certificate
+          cp /opt/config/monit/certificate /etc/monit/conf.d/
           service nginx stop
           sudo bash /opt/openflixr/letsencrypt.sh
           failed1=$(cat /var/log/letsencrypt/letsencrypt.log | grep \"Failed authorization procedure\")
@@ -600,6 +611,13 @@ crudini --set /usr/share/nginx/html/setup/config.ini extras spotuser $spotuser
 crudini --set /usr/share/nginx/html/setup/config.ini extras spotpass $spotpass
 crudini --set /usr/share/nginx/html/setup/config.ini extras imdb $imdb
 crudini --set /usr/share/nginx/html/setup/config.ini extras comicvine $comicvine
+crudini --set /usr/share/nginx/html/setup/config.ini custom custom10 $couchapi
+crudini --set /usr/share/nginx/html/setup/config.ini custom custom11 $sickapi
+crudini --set /usr/share/nginx/html/setup/config.ini custom custom12 $headapi
+crudini --set /usr/share/nginx/html/setup/config.ini custom custom13 $mylapi
+crudini --set /usr/share/nginx/html/setup/config.ini custom custom14 $sabapi
+crudini --set /usr/share/nginx/html/setup/config.ini custom custom15 $jackapi
+crudini --set /usr/share/nginx/html/setup/config.ini custom custom16 $sonapi
 
 systemctl --system daemon-reload
 bash /opt/openflixr/updatewkly.sh
