@@ -32,7 +32,7 @@ echo "                    <div class=\"wizard-container\">\n";
 echo "                        <div class=\"card wizard-card ct-wizard-azzure\" id=\"wizard\">\n";
 echo "                            <form action=\"settings.php\" method=\"POST\" id=\"registration-form\">\n";
 echo "                                <div class=\"wizard-header\">\n";
-echo "                                    <h3>OpenFLIXR <b>Setup</b><sup> 1.2.2</sup<br><br></h3>\n";
+echo "                                    <h3>OpenFLIXR <b>Setup</b><sup> 1.2.3</sup<br><br></h3>\n";
 echo "                                </div>\n";
 echo "                                <ul>\n";
 echo "                                    <li><a href=\"#setup\" data-toggle=\"tab\">Info</a></li>\n";
