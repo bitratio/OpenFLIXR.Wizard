@@ -54,7 +54,7 @@ echo "                                                <h4 class=\"info-text\">We
 echo "                                            </div>\n";
 echo "\n";
 echo "                                            <div class=\"col-sm-10 col-sm-offset-1\">\n";
-echo "                                                <p><span style=\"color: #808080;\">Finishing this setup will automatically create random API keys and install Plex Media Server.</span></p>\n";
+echo "                                                <p><span style=\"color: #808080;\">Finishing this setup will automatically generate API keys and install Plex Media Server.</span></p>\n";
 echo "                                                <p><span style=\"color: #808080;\">Before you can use OpenFLIXR, you need to mount ‘downloads’ (subdirectories will be automatically created at boot time), ‘movies’, ‘series’, ’music’, ‘comics’ and ‘books’ folders from a location with enough free disk space like a NAS, local/external harddrive, etc.</span></p>\n";
 echo "                                                <p><span style=\"color: #808080;\">To make things&nbsp;easier you can use <a href=\"/webmin/mount/\" target=\"_blank\" rel=\"tooltip\" title=\"Default username and password: openflixr. Go to 'System - Disk and Network Filesystems'\">Webmin<sup> <i class=\"fa fa-external-link\" aria-hidden=\"true\" style=\"font-size:0.8em\"></i></sup></a> to accomplish this. OpenFLIXR is case sensitive.</span></p>\n";
 echo "                                                <br><p><span class=\"alert alert-info\">To be able to use OpenFLIXR with default settings, you must use the following directory structure</span></p><br>\n";
