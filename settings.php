@@ -560,7 +560,6 @@ EOF
           sed -i 's/^email.*/email = $email/' /opt/letsencrypt/cli.ini
           sed -i 's/^domains.*/domains = $domainname, www.$domainname/' /opt/letsencrypt/cli.ini
           sed -i 's/check host example.com with address example.com/check host $domain with address $domain/' /opt/config/monit/certificate
-          rd /etc/monit/conf.d/certificate
           service nginx stop
           sudo bash /opt/openflixr/letsencrypt.sh
           failed1=$(cat /var/log/letsencrypt/letsencrypt.log | grep \"Failed authorization procedure\")
